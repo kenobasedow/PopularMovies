@@ -4,7 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
@@ -32,16 +34,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mMovieTextView;
+        private ImageView mMovieImageView;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
-
-            mMovieTextView = (TextView) itemView.findViewById(R.id.tv_movie_name);
+            mMovieImageView = (ImageView) itemView.findViewById(R.id.iv_movie_thumpnail);
         }
 
         public void bind(int index) {
-            mMovieTextView.setText("Movie Name " + index);
+            Picasso.with(itemView.getContext())
+                    .load("http://image.tmdb.org/t/p/w185/WLQN5aiQG8wc9SeKwixW7pAR8K.jpg")
+                    .into(mMovieImageView);
         }
     }
 }
