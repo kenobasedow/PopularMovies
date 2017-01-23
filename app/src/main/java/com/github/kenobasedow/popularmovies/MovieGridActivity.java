@@ -15,9 +15,9 @@ import java.net.URL;
 public class MovieGridActivity extends AppCompatActivity {
 
     private static final int NUM_ROWS = 2;
-    private static final int NUM_ITEMS = 10;
 
     private RecyclerView mMovieGrid;
+    private MovieAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,8 @@ public class MovieGridActivity extends AppCompatActivity {
         mMovieGrid = (RecyclerView) findViewById(R.id.rv_movies);
         mMovieGrid.setHasFixedSize(true);
         mMovieGrid.setLayoutManager(new GridLayoutManager(this, NUM_ROWS));
-        mMovieGrid.setAdapter(new MovieAdapter(NUM_ITEMS));
+        mAdapter = new MovieAdapter();
+        mMovieGrid.setAdapter(mAdapter);
 
         loadMovies();
     }
@@ -47,11 +48,16 @@ public class MovieGridActivity extends AppCompatActivity {
                 String moviesJson = NetworkUtils.getResponseFromHttpUrl(moviesRequestUrl);
                 if (moviesJson == null)
                     return null;
-                String[] moviesPictures = TheMovieDbJsonUtils.getMoviePicturesFromJson(moviesJson);
+                return TheMovieDbJsonUtils.getMoviePicturesFromJson(moviesJson);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] moviePictures) {
+            mAdapter.setMoviePictures(moviePictures);
         }
     }
 }

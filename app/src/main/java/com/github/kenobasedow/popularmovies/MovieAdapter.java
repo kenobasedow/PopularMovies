@@ -10,15 +10,16 @@ import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private int mNumberItems;
+    private String[] mMoviePictures = null;
 
-    public MovieAdapter(int numberItems) {
-        mNumberItems = numberItems;
+    public MovieAdapter() {
     }
 
     @Override
     public int getItemCount() {
-        return mNumberItems;
+        if (mMoviePictures == null)
+            return 0;
+        return mMoviePictures.length;
     }
 
     @Override
@@ -29,22 +30,29 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
-        holder.bind(position);
+        if (mMoviePictures.length <= 0)
+            return;
+        if (position < 0)
+            return;
+        if (position >= mMoviePictures.length)
+            return;
+        Picasso.with(holder.itemView.getContext())
+                .load("http://image.tmdb.org/t/p/w185/" + mMoviePictures[position])
+                .into(holder.mMovieImageView);
+    }
+
+    public void setMoviePictures(String[] moviePictures) {
+        mMoviePictures = moviePictures;
+        notifyDataSetChanged();
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mMovieImageView;
+        public final ImageView mMovieImageView;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
             mMovieImageView = (ImageView) itemView.findViewById(R.id.iv_movie_thumpnail);
-        }
-
-        public void bind(int index) {
-            Picasso.with(itemView.getContext())
-                    .load("http://image.tmdb.org/t/p/w185/WLQN5aiQG8wc9SeKwixW7pAR8K.jpg")
-                    .into(mMovieImageView);
         }
     }
 }
