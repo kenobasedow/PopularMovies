@@ -6,14 +6,17 @@ import org.json.JSONObject;
 
 public class TheMovieDbJsonUtils {
 
+    private static final String JSON_ARRAY_MOVIES = "results";
+    private static final String JSON_ATTRIBUTE_PICTURE = "poster_path";
+
     public static String[] getMoviePicturesFromJson(String moviesJsonString) {
         try {
             JSONObject json = new JSONObject(moviesJsonString);
-            JSONArray movies = json.getJSONArray("results");
+            JSONArray movies = json.getJSONArray(JSON_ARRAY_MOVIES);
             String[] moviePictures = new String[movies.length()];
             for (int i = 0; i < movies.length(); i++) {
                 JSONObject movie = movies.getJSONObject(i);
-                moviePictures[i] = movie.getString("poster_path");
+                moviePictures[i] = movie.getString(JSON_ATTRIBUTE_PICTURE);
             }
             return moviePictures;
         } catch (JSONException e) {
