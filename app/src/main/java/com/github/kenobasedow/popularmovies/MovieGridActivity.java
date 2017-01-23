@@ -41,7 +41,7 @@ public class MovieGridActivity extends AppCompatActivity {
 
         @Override
         protected String[] doInBackground(Void... voids) {
-            URL moviesRequestUrl = NetworkUtils.buildUrl();
+            URL moviesRequestUrl = NetworkUtils.buildUrl(getString(R.string.api_key));
             if (moviesRequestUrl == null)
                 return null;
             try {
