@@ -14,12 +14,13 @@ public class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/popular";
+    private static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie";
     private static final String API_KEY_PARAM = "api_key";
 
-    public static URL buildUrl(String apiKey) {
+    public static URL buildUrl(String apiKey, String sortOrder) {
         try {
             String uri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                    .appendPath(sortOrder)
                     .appendQueryParameter(API_KEY_PARAM, apiKey)
                     .build().toString();
             Log.v(TAG, "Build URI: " + uri);
