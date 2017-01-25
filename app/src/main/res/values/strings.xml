@@ -2,6 +2,7 @@
     <string name="app_name">Popular Movies</string>
     <string name="action_settings">Settings</string>
     <string name="settings_activityName">Settings</string>
+    <string name="movieDetails_activityName">Movie Details</string>
 
     <string name="pref_sortOrderKey" translatable="false">pref_sortOrder</string>
     <string name="pref_sortOrder">Sort order</string>

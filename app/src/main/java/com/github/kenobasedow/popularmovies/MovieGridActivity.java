@@ -17,7 +17,7 @@ import com.github.kenobasedow.popularmovies.utilities.TheMovieDbJsonUtils;
 import java.io.IOException;
 import java.net.URL;
 
-public class MovieGridActivity extends AppCompatActivity {
+public class MovieGridActivity extends AppCompatActivity implements MovieAdapter.MovieClickListener {
 
     private static final int NUM_ROWS = 2;
 
@@ -32,7 +32,7 @@ public class MovieGridActivity extends AppCompatActivity {
         mMovieGrid = (RecyclerView) findViewById(R.id.rv_movies);
         mMovieGrid.setHasFixedSize(true);
         mMovieGrid.setLayoutManager(new GridLayoutManager(this, NUM_ROWS));
-        mAdapter = new MovieAdapter();
+        mAdapter = new MovieAdapter(this);
         mMovieGrid.setAdapter(mAdapter);
     }
 
@@ -59,6 +59,13 @@ public class MovieGridActivity extends AppCompatActivity {
 
     private void loadMovies() {
         new FetchMoviesTask().execute();
+    }
+
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+        intent.putExtra(Intent.EXTRA_TEXT, mAdapter.moviePicture(position));
+        startActivity(intent);
     }
 
     public class FetchMoviesTask extends AsyncTask<Void, Void, String[]> {

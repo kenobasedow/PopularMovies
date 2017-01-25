@@ -11,8 +11,20 @@ import com.squareup.picasso.Picasso;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private String[] mMoviePictures = null;
+    private MovieClickListener mMovieClickListner;
 
-    public MovieAdapter() {
+    public interface MovieClickListener {
+        void onClick(int position);
+    }
+
+    public MovieAdapter(MovieClickListener movieClickListener) {
+        mMovieClickListner = movieClickListener;
+    }
+
+    public String moviePicture(int position) {
+        if (position < 0 || position >= mMoviePictures.length)
+            return null;
+        return mMoviePictures[position];
     }
 
     @Override
@@ -46,13 +58,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         notifyDataSetChanged();
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final ImageView mMovieImageView;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
             mMovieImageView = (ImageView) itemView.findViewById(R.id.iv_movie_thumpnail);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mMovieClickListner.onClick(getAdapterPosition());
         }
     }
 }

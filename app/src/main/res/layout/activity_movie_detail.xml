@@ -20,19 +20,24 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/iv_movie_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:src="@mipmap/ic_launcher"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:padding="10dp">
 
             <TextView
@@ -40,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2015"
-                android:textSize="20sp"/>
+                android:textSize="30sp"/>
 
             <TextView
                 android:id="@+id/tv_movie_length"
@@ -48,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="120min"
                 android:textSize="20sp"
+                android:textStyle="italic"
                 android:paddingTop="5dp"/>
 
             <TextView
@@ -55,7 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8.1/10"
-                android:textSize="20sp"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 android:paddingTop="5dp"/>
 
         </LinearLayout>
@@ -65,7 +72,8 @@
     <TextView
         android:id="@+id/tv_movie_plot"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
         android:padding="10dp"/>
 

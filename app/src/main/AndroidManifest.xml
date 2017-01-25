@@ -13,7 +13,6 @@
         <activity android:name=".MovieGridActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,7 +24,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MovieGridActivity" />
         </activity>
-        <activity android:name=".MovieDetailActivity"></activity>
+        <activity
+            android:name=".MovieDetailActivity"
+            android:label="@string/movieDetails_activityName"
+            android:parentActivityName=".MovieGridActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MovieGridActivity" />
+
+        </activity>
     </application>
 
 </manifest>
