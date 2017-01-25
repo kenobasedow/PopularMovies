@@ -13,7 +13,60 @@
         android:layout_height="wrap_content"
         android:text="Chappie"
         style="@style/TextAppearance.AppCompat.Title"
-        android:padding="20dp"
-        android:background="#00ff00"/>
+        android:padding="30dp"
+        android:background="#303F9F"
+        android:textColor="#FFFFFF"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_movie_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_movie_release"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tv_movie_length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="120min"
+                android:textSize="20sp"
+                android:paddingTop="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_movie_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8.1/10"
+                android:textSize="20sp"
+                android:paddingTop="5dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/tv_movie_plot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
+        android:padding="10dp"/>
 
 </LinearLayout>
