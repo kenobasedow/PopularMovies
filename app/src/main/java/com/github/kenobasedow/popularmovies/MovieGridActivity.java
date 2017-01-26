@@ -58,7 +58,15 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
     }
 
     private void loadMovies() {
-        new FetchMoviesTask().execute();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MovieGridActivity.this);
+        String prefSortOrder = sharedPref.getString(getString(R.string.pref_sortOrderKey), getString(R.string.pref_sortOrderDefaultValue));
+
+        if (prefSortOrder.equals("popular"))
+            setTitle(getString(R.string.popular_title));
+        else
+            setTitle(getString(R.string.top_rated_title));
+
+        new FetchMoviesTask().execute(prefSortOrder);
     }
 
     @Override
@@ -68,12 +76,11 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
         startActivity(intent);
     }
 
-    public class FetchMoviesTask extends AsyncTask<Void, Void, Movie[]> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
 
         @Override
-        protected Movie[] doInBackground(Void... voids) {
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MovieGridActivity.this);
-            String prefSortOrder = sharedPref.getString(getString(R.string.pref_sortOrderKey), getString(R.string.pref_sortOrderDefaultValue));
+        protected Movie[] doInBackground(String... arguments) {
+            String prefSortOrder = arguments[0];
 
             URL moviesRequestUrl = NetworkUtils.buildUrl(getString(R.string.api_key), prefSortOrder);
             if (moviesRequestUrl == null)
@@ -82,7 +89,7 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
                 String moviesJson = NetworkUtils.getResponseFromHttpUrl(moviesRequestUrl);
                 if (moviesJson == null)
                     return null;
-                return TheMovieDbJsonUtils.getMoviePicturesFromJson(moviesJson);
+                return TheMovieDbJsonUtils.getMoviesFromJson(moviesJson);
             } catch (IOException e) {
                 e.printStackTrace();
             }

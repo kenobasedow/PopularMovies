@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Chappie"
-        style="@style/TextAppearance.AppCompat.Title"
+        android:textSize="40sp"
         android:padding="30dp"
         android:background="#303F9F"
         android:textColor="#FFFFFF"/>
@@ -41,28 +41,18 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/tv_movie_release"
+                android:id="@+id/tv_movie_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2015"
+                android:text="2015-01-01"
                 android:textSize="30sp"/>
-
-            <TextView
-                android:id="@+id/tv_movie_length"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="120min"
-                android:textSize="20sp"
-                android:textStyle="italic"
-                android:paddingTop="5dp"/>
 
             <TextView
                 android:id="@+id/tv_movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8.1/10"
-                android:textSize="15sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
                 android:paddingTop="5dp"/>
 
         </LinearLayout>
@@ -75,6 +65,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
+        android:textSize="15sp"
         android:padding="10dp"/>
 
 </LinearLayout>

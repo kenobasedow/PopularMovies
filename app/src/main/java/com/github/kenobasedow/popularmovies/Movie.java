@@ -8,6 +8,6 @@ public class Movie implements Serializable {
     public String title;
     public String picturePath;
     public String plot;
-    public float rating;
+    public double rating;
     public String releaseDate;
 }
