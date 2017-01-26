@@ -64,14 +64,14 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
     @Override
     public void onClick(int position) {
         Intent intent = new Intent(this, MovieDetailActivity.class);
-        intent.putExtra(Intent.EXTRA_TEXT, mAdapter.moviePicture(position));
+        intent.putExtra(Movie.TAG, mAdapter.movie(position));
         startActivity(intent);
     }
 
-    public class FetchMoviesTask extends AsyncTask<Void, Void, String[]> {
+    public class FetchMoviesTask extends AsyncTask<Void, Void, Movie[]> {
 
         @Override
-        protected String[] doInBackground(Void... voids) {
+        protected Movie[] doInBackground(Void... voids) {
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MovieGridActivity.this);
             String prefSortOrder = sharedPref.getString(getString(R.string.pref_sortOrderKey), getString(R.string.pref_sortOrderDefaultValue));
 
@@ -90,8 +90,8 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
         }
 
         @Override
-        protected void onPostExecute(String[] moviePictures) {
-            mAdapter.setMoviePictures(moviePictures);
+        protected void onPostExecute(Movie[] movies) {
+            mAdapter.setMovies(movies);
         }
     }
 }

@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private String[] mMoviePictures = null;
+    private Movie[] mMovies = null;
     private MovieClickListener mMovieClickListner;
 
     public interface MovieClickListener {
@@ -21,17 +21,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         mMovieClickListner = movieClickListener;
     }
 
-    public String moviePicture(int position) {
-        if (position < 0 || position >= mMoviePictures.length)
+    public Movie movie(int position) {
+        if (!validMovie(position))
             return null;
-        return mMoviePictures[position];
+        return mMovies[position];
     }
 
     @Override
     public int getItemCount() {
-        if (mMoviePictures == null)
+        if (mMovies == null)
             return 0;
-        return mMoviePictures.length;
+        return mMovies.length;
     }
 
     @Override
@@ -42,20 +42,24 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
-        if (mMoviePictures.length <= 0)
-            return;
-        if (position < 0)
-            return;
-        if (position >= mMoviePictures.length)
+        if (!validMovie(position))
             return;
         Picasso.with(holder.itemView.getContext())
-                .load("http://image.tmdb.org/t/p/w185/" + mMoviePictures[position])
+                .load("http://image.tmdb.org/t/p/w185/" + mMovies[position].picturePath)
                 .into(holder.mMovieImageView);
     }
 
-    public void setMoviePictures(String[] moviePictures) {
-        mMoviePictures = moviePictures;
+    public void setMovies(Movie[] movies) {
+        mMovies = movies;
         notifyDataSetChanged();
+    }
+
+    private boolean validMovie(int position) {
+        if (mMovies == null) return false;
+        if (mMovies.length <= 0) return false;
+        if (position < 0) return false;
+        if (position >= mMovies.length) return false;
+        return true;
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
