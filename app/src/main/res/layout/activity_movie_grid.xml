@@ -12,4 +12,20 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/movie_grid_item" />
 
+    <TextView
+        android:id="@+id/tv_load_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/error_loading_movies"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:visibility="invisible"/>
+
+    <ProgressBar
+        android:id="@+id/pb_loading_movies"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
+
 </FrameLayout>

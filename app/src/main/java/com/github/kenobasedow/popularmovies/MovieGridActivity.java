@@ -10,6 +10,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.kenobasedow.popularmovies.utilities.NetworkUtils;
 import com.github.kenobasedow.popularmovies.utilities.TheMovieDbJsonUtils;
@@ -24,6 +27,9 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
     private RecyclerView mMovieGrid;
     private MovieAdapter mAdapter;
 
+    private TextView mLoadingErrorTextView;
+    private ProgressBar mLoadingProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,9 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
         mMovieGrid.setLayoutManager(new GridLayoutManager(this, NUM_ROWS));
         mAdapter = new MovieAdapter(this);
         mMovieGrid.setAdapter(mAdapter);
+
+        mLoadingErrorTextView = (TextView) findViewById(R.id.tv_load_error);
+        mLoadingProgressBar = (ProgressBar) findViewById(R.id.pb_loading_movies);
     }
 
     @Override
@@ -66,6 +75,9 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
         else
             setTitle(getString(R.string.top_rated_title));
 
+        mMovieGrid.setVisibility(View.VISIBLE);
+        mLoadingErrorTextView.setVisibility(View.INVISIBLE);
+
         new FetchMoviesTask().execute(prefSortOrder);
     }
 
@@ -77,6 +89,11 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
     }
 
     public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
+
+        @Override
+        protected void onPreExecute() {
+            mLoadingProgressBar.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected Movie[] doInBackground(String... arguments) {
@@ -98,6 +115,11 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
 
         @Override
         protected void onPostExecute(Movie[] movies) {
+            mLoadingProgressBar.setVisibility(View.INVISIBLE);
+            if (movies == null) {
+                mMovieGrid.setVisibility(View.INVISIBLE);
+                mLoadingErrorTextView.setVisibility(View.VISIBLE);
+            }
             mAdapter.setMovies(movies);
         }
     }
