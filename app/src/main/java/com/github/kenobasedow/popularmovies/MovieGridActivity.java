@@ -22,8 +22,6 @@ import java.net.URL;
 
 public class MovieGridActivity extends AppCompatActivity implements MovieAdapter.MovieClickListener {
 
-    private static final int NUM_ROWS = 2;
-
     private RecyclerView mMovieGrid;
     private MovieAdapter mAdapter;
 
@@ -37,7 +35,7 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
 
         mMovieGrid = (RecyclerView) findViewById(R.id.rv_movies);
         mMovieGrid.setHasFixedSize(true);
-        mMovieGrid.setLayoutManager(new GridLayoutManager(this, NUM_ROWS));
+        mMovieGrid.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.movie_grid_num_rows)));
         mAdapter = new MovieAdapter(this);
         mMovieGrid.setAdapter(mAdapter);
 

@@ -6,6 +6,7 @@
     <string name="popular_title">Popular Movies</string>
     <string name="top_rated_title">Top Rated Movies</string>
     <string name="error_loading_movies">Could not load movies.</string>
+    <integer name="movie_grid_num_rows">2</integer>
 
     <string name="pref_sortOrderKey" translatable="false">pref_sortOrder</string>
     <string name="pref_sortOrder">Sort order</string>

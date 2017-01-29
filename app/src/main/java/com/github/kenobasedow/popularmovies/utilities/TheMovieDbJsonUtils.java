@@ -9,7 +9,7 @@ import org.json.JSONObject;
 public class TheMovieDbJsonUtils {
 
     private static final String JSON_ARRAY_MOVIES = "results";
-    private static final String JSON_ATTRIBUTE_TITLE = "original_title";
+    private static final String JSON_ATTRIBUTE_TITLE = "title";
     private static final String JSON_ATTRIBUTE_PICTURE_PATH = "poster_path";
     private static final String JSON_ATTRIBUTE_PLOT = "overview";
     private static final String JSON_ATTRIBUTE_RATING = "vote_average";
