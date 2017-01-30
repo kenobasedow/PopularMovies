@@ -70,7 +70,7 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MovieGridActivity.this);
         String prefSortOrder = sharedPref.getString(getString(R.string.pref_sortOrderKey), getString(R.string.pref_sortOrderDefaultValue));
 
-        if (prefSortOrder.equals("popular"))
+        if (prefSortOrder.equals(getString(R.string.pref_sortOrderDefaultValue)))
             setTitle(getString(R.string.popular_title));
         else
             setTitle(getString(R.string.top_rated_title));
