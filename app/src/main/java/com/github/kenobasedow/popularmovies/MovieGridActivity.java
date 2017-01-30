@@ -1,5 +1,6 @@
 package com.github.kenobasedow.popularmovies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -8,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +37,7 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
 
         mMovieGrid = (RecyclerView) findViewById(R.id.rv_movies);
         mMovieGrid.setHasFixedSize(true);
-        mMovieGrid.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.movie_grid_num_rows)));
+        mMovieGrid.setLayoutManager(new GridLayoutManager(this, calculateNoOfColumns(this)));
         mAdapter = new MovieAdapter(this);
         mMovieGrid.setAdapter(mAdapter);
 
@@ -84,6 +86,13 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
         Intent intent = new Intent(this, MovieDetailActivity.class);
         intent.putExtra(Movie.TAG, mAdapter.movie(position));
         startActivity(intent);
+    }
+
+    private static int calculateNoOfColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int noOfColumns = (int) (dpWidth / 180);
+        return noOfColumns;
     }
 
     public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
