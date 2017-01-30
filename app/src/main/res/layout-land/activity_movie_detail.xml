@@ -33,38 +33,44 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"/>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ScrollView
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:padding="10dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_movie_release_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2015-01-01"
-                android:textSize="30sp"/>
-
-            <TextView
-                android:id="@+id/tv_movie_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="8.1/10"
-                android:textSize="20sp"
-                android:paddingTop="5dp"/>
-
-            <TextView
-                android:id="@+id/tv_movie_plot"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
-                android:textSize="15sp"
-                android:paddingTop="5dp"/>
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_movie_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2015-01-01"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/tv_movie_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8.1/10"
+                    android:textSize="20sp"
+                    android:paddingTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/tv_movie_plot"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
+                    android:textSize="15sp"
+                    android:paddingTop="5dp"/>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
