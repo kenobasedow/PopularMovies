@@ -3,7 +3,6 @@ package com.github.kenobasedow.popularmovies;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,13 +15,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.github.kenobasedow.popularmovies.utilities.NetworkUtils;
-import com.github.kenobasedow.popularmovies.utilities.TheMovieDbJsonUtils;
-
-import java.io.IOException;
-import java.net.URL;
-
-public class MovieGridActivity extends AppCompatActivity implements MovieAdapter.MovieClickListener {
+public class MovieGridActivity extends AppCompatActivity
+        implements MovieAdapter.MovieClickListener, AsyncTaskCompleteListener<Movie[]> {
 
     private RecyclerView mMovieGrid;
     private MovieAdapter mAdapter;
@@ -77,8 +71,19 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
 
         mMovieGrid.setVisibility(View.VISIBLE);
         mLoadingErrorTextView.setVisibility(View.INVISIBLE);
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
 
-        new FetchMoviesTask().execute(prefSortOrder);
+        new FetchMoviesTask(this).execute(getString(R.string.api_key), prefSortOrder);
+    }
+
+    @Override
+    public void onTaskComplete(Movie[] movies) {
+        mLoadingProgressBar.setVisibility(View.INVISIBLE);
+        if (movies == null) {
+            mMovieGrid.setVisibility(View.INVISIBLE);
+            mLoadingErrorTextView.setVisibility(View.VISIBLE);
+        }
+        mAdapter.setMovies(movies);
     }
 
     @Override
@@ -95,39 +100,4 @@ public class MovieGridActivity extends AppCompatActivity implements MovieAdapter
         return noOfColumns;
     }
 
-    public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
-
-        @Override
-        protected void onPreExecute() {
-            mLoadingProgressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected Movie[] doInBackground(String... arguments) {
-            String prefSortOrder = arguments[0];
-
-            URL moviesRequestUrl = NetworkUtils.buildUrl(getString(R.string.api_key), prefSortOrder);
-            if (moviesRequestUrl == null)
-                return null;
-            try {
-                String moviesJson = NetworkUtils.getResponseFromHttpUrl(moviesRequestUrl);
-                if (moviesJson == null)
-                    return null;
-                return TheMovieDbJsonUtils.getMoviesFromJson(moviesJson);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Movie[] movies) {
-            mLoadingProgressBar.setVisibility(View.INVISIBLE);
-            if (movies == null) {
-                mMovieGrid.setVisibility(View.INVISIBLE);
-                mLoadingErrorTextView.setVisibility(View.VISIBLE);
-            }
-            mAdapter.setMovies(movies);
-        }
-    }
 }
