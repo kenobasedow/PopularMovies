@@ -3,6 +3,8 @@ package com.github.kenobasedow.popularmovies;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +62,19 @@ public class MovieGridActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
     private void loadMovies() {
+        if (!isOnline()) {
+            mMovieGrid.setVisibility(View.INVISIBLE);
+            mLoadingErrorTextView.setText(R.string.error_no_network);
+            mLoadingErrorTextView.setVisibility(View.VISIBLE);
+        }
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MovieGridActivity.this);
         String prefSortOrder = sharedPref.getString(getString(R.string.pref_sortOrderKey), getString(R.string.pref_sortOrderDefaultValue));
 
