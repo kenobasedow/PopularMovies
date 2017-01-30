@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"
+            tools:src="@mipmap/ic_launcher"
             android:padding="10dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"/>
@@ -44,14 +44,14 @@
                 android:id="@+id/tv_movie_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2015-01-01"
+                tools:text="2015-01-01"
                 android:textSize="30sp"/>
 
             <TextView
                 android:id="@+id/tv_movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8.1/10"
+                tools:text="8.1/10"
                 android:textSize="20sp"
                 android:paddingTop="5dp"/>
 
@@ -68,7 +68,7 @@
             android:id="@+id/tv_movie_plot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
+            tools:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
             android:textSize="15sp"
             android:padding="10dp"
             android:scrollbars="vertical"/>
