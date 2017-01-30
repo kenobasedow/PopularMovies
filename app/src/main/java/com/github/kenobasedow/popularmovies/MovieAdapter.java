@@ -10,6 +10,8 @@ import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
+    private static final String MOVIE_PICTURE_BASE_URL = "http://image.tmdb.org/t/p/w185";
+
     private Movie[] mMovies = null;
     private MovieClickListener mMovieClickListner;
 
@@ -45,7 +47,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         if (!validMovie(position))
             return;
         Picasso.with(holder.itemView.getContext())
-                .load("http://image.tmdb.org/t/p/w185/" + mMovies[position].picturePath)
+                .load(MOVIE_PICTURE_BASE_URL + mMovies[position].picturePath)
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
                 .into(holder.mMovieImageView);
     }
 
