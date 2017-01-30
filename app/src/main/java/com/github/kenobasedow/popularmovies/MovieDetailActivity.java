@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.kenobasedow.popularmovies.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
 public class MovieDetailActivity extends AppCompatActivity {
+
+    private static final String FORMAT_RATING = "%.1f/10";
 
     TextView mMovieTitleTextView;
     TextView mMovieReleaseDateTextView;
@@ -33,11 +36,13 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             mMovieTitleTextView.setText(movie.title);
             mMovieReleaseDateTextView.setText(movie.releaseDate);
-            mMovieRatingTextView.setText(String.format("%.1f/10", movie.rating));
+            mMovieRatingTextView.setText(String.format(FORMAT_RATING, movie.rating));
             mMoviePlotTextView.setText(movie.plot);
 
             Picasso.with(this)
-                    .load("http://image.tmdb.org/t/p/w185" + movie.picturePath)
+                    .load(NetworkUtils.MOVIE_PICTURE_BASE_URL + movie.picturePath)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
                     .into(mMoviePictureImageView);
         }
     }

@@ -14,8 +14,10 @@ public class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie";
     private static final String API_KEY_PARAM = "api_key";
+
+    public static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie";
+    public static final String MOVIE_PICTURE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 
     public static URL buildUrl(String apiKey, String sortOrder) {
         try {
