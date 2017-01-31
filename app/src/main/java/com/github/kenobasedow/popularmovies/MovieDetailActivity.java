@@ -32,7 +32,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         mMoviePictureImageView = (ImageView) findViewById(R.id.iv_movie_picture);
 
         if (getIntent().hasExtra(Movie.TAG)) {
-            Movie movie = (Movie) getIntent().getSerializableExtra(Movie.TAG);
+            Movie movie = (Movie) getIntent().getParcelableExtra(Movie.TAG);
 
             mMovieTitleTextView.setText(movie.title);
             mMovieReleaseDateTextView.setText(movie.releaseDate);
