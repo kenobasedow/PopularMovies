@@ -1,78 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.github.kenobasedow.popularmovies.MovieDetailActivity">
-
-    <TextView
-        android:id="@+id/tv_movie_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chappie"
-        android:textSize="40sp"
-        android:padding="30dp"
-        android:background="#303F9F"
-        android:textColor="#FFFFFF"/>
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="movie"
+            type="com.github.kenobasedow.popularmovies.Movie"/>
+    </data>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        tools:context="com.github.kenobasedow.popularmovies.MovieDetailActivity">
 
-        <ImageView
-            android:id="@+id/iv_movie_picture"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            tools:src="@mipmap/ic_launcher"
-            android:padding="10dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{movie.title}"
+            android:textSize="40sp"
+            android:padding="30dp"
+            android:background="#303F9F"
+            android:textColor="#FFFFFF"/>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:padding="10dp">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/tv_movie_release_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="2015-01-01"
-                android:textSize="30sp"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:imageUrl="@{movie.pictureUrl}"
+                android:padding="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
 
-            <TextView
-                android:id="@+id/tv_movie_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="8.1/10"
-                android:textSize="20sp"
-                android:paddingTop="5dp"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{movie.releaseDate}"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{movie.ratingString}"
+                    android:textSize="20sp"
+                    android:paddingTop="5dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/tv_movie_plot"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot."
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:scrollbars="vertical"/>
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-    </ScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{movie.plot}"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:scrollbars="vertical"/>
 
-</LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>
