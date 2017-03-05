@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.github.kenobasedow.popularmovies.databinding.ActivityMovieDetailBinding;
+import com.github.kenobasedow.popularmovies.domain.Movie;
 
 public class MovieDetailActivity extends AppCompatActivity {
 

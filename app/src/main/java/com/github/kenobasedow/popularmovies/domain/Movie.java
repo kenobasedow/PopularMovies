@@ -1,10 +1,11 @@
-package com.github.kenobasedow.popularmovies;
+package com.github.kenobasedow.popularmovies.domain;
 
 import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
 
+import com.github.kenobasedow.popularmovies.R;
 import com.github.kenobasedow.popularmovies.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
@@ -14,11 +15,13 @@ public class Movie implements Parcelable {
 
     public static final String TAG = Movie.class.getName();
 
+    public String id;
     public String title;
     public String picturePath;
     public String plot;
     public double rating;
     public String releaseDate;
+    public Video[] videos;
 
     public Movie() {
     }
@@ -46,6 +49,7 @@ public class Movie implements Parcelable {
         plot = parcel.readString();
         rating = parcel.readDouble();
         releaseDate = parcel.readString();
+        videos = parcel.createTypedArray(Video.CREATOR);
     }
 
     @Override
@@ -60,6 +64,7 @@ public class Movie implements Parcelable {
         parcel.writeString(plot);
         parcel.writeDouble(rating);
         parcel.writeString(releaseDate);
+        parcel.writeTypedArray(videos, 0);
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.github.kenobasedow.popularmovies.domain.Movie;
 import com.github.kenobasedow.popularmovies.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
 

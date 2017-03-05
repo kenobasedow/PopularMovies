@@ -15,17 +15,33 @@ public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String API_KEY_PARAM = "api_key";
+    private static final String VIDEOS_PATH = "videos";
 
     public static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie";
     public static final String MOVIE_PICTURE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 
-    public static URL buildUrl(String apiKey, String sortOrder) {
+    public static URL buildQueryUrl(String apiKey, String sortOrder) {
         try {
             String uri = Uri.parse(MOVIE_BASE_URL).buildUpon()
                     .appendPath(sortOrder)
                     .appendQueryParameter(API_KEY_PARAM, apiKey)
                     .build().toString();
-            Log.v(TAG, "Build URI: " + uri);
+            Log.v(TAG, "Build query URI: " + uri);
+            return new URL(uri);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static URL buildVideosUrl(String apiKey, String movieId) {
+        try {
+            String uri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                    .appendPath(movieId)
+                    .appendPath(VIDEOS_PATH)
+                    .appendQueryParameter(API_KEY_PARAM, apiKey)
+                    .build().toString();
+            Log.v(TAG, "Build videos URI: " + uri);
             return new URL(uri);
         } catch (MalformedURLException e) {
             e.printStackTrace();

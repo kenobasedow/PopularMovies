@@ -6,7 +6,7 @@
     <data>
         <variable
             name="movie"
-            type="com.github.kenobasedow.popularmovies.Movie"/>
+            type="com.github.kenobasedow.popularmovies.domain.Movie"/>
     </data>
     <LinearLayout
         android:orientation="vertical"

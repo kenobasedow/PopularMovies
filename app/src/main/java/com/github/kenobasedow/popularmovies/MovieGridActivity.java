@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.kenobasedow.popularmovies.domain.Movie;
+
 public class MovieGridActivity extends AppCompatActivity
         implements MovieAdapter.MovieClickListener, AsyncTaskCompleteListener<Movie[]> {
 
