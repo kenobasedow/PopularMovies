@@ -18,7 +18,7 @@
             android:id="@+id/tv_movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{movie.title}"
+            android:text="@{movie.title, default=`Chappie`}"
             android:textSize="40sp"
             android:padding="30dp"
             android:background="#303F9F"
@@ -35,6 +35,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 app:imageUrl="@{movie.pictureUrl}"
+                tools:src="@mipmap/ic_launcher"
                 android:padding="10dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
@@ -51,15 +52,15 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{movie.releaseDate}"
+                        android:text="@{movie.releaseDate, default=`2015-01-01`}"
                         android:textSize="30sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{movie.ratingString}"
+                        android:text="@{movie.ratingString, default=`8.1/10`}"
                         android:textSize="20sp"
                         android:paddingTop="5dp"/>
 
@@ -67,7 +68,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="@{movie.plot}"
+                        android:text="@{movie.plot, default=`Every child comes into the world full of promise and none more so than Chappie: he is giftedm special, a prodigy. Chappie he is a robot.`}"
+                        android:textSize="15sp"
+                        android:paddingTop="5dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_trailers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Trailers:"
                         android:textSize="15sp"
                         android:paddingTop="5dp"/>
 

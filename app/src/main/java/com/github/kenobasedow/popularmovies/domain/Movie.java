@@ -44,6 +44,7 @@ public class Movie implements Parcelable {
     }
 
     public Movie(Parcel parcel) {
+        id = parcel.readString();
         title = parcel.readString();
         picturePath = parcel.readString();
         plot = parcel.readString();
@@ -59,6 +60,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(id);
         parcel.writeString(title);
         parcel.writeString(picturePath);
         parcel.writeString(plot);
