@@ -18,7 +18,13 @@ public class MovieTrailersReviewsAdapter extends RecyclerView.Adapter<MovieTrail
     private Movie mMovie = null;
     private Video[] mVideos = new Video[0];
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    private final VideoClickListener mVideoClickListener;
+
+    public interface VideoClickListener {
+        public void onVideoClicked(int videoIndex);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final MovieDetailHeaderBinding mBinding;
         private final TextView mVideoTextView;
 
@@ -30,6 +36,7 @@ public class MovieTrailersReviewsAdapter extends RecyclerView.Adapter<MovieTrail
 
         public ViewHolder(View view) {
             super(view);
+            view.setOnClickListener(this);
             mBinding = null;
             mVideoTextView = (TextView) view.findViewById(R.id.tv_trailer);
         }
@@ -42,6 +49,18 @@ public class MovieTrailersReviewsAdapter extends RecyclerView.Adapter<MovieTrail
         public void bind(Video video) {
             mVideoTextView.setText(video.name);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (getAdapterPosition() > 0) {
+                mVideoClickListener.onVideoClicked(getAdapterPosition() - 1);
+            }
+        }
+    }
+
+    public MovieTrailersReviewsAdapter(VideoClickListener videoClickListener) {
+        super();
+        mVideoClickListener = videoClickListener;
     }
 
     @Override
@@ -94,4 +113,5 @@ public class MovieTrailersReviewsAdapter extends RecyclerView.Adapter<MovieTrail
         mVideos = videos;
         notifyDataSetChanged();
     }
+
 }
